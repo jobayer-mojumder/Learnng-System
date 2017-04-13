@@ -2,7 +2,9 @@
 
 include_once '../../include/config.php';
 include_once '../../include/auth.php';
-
+if($_SESSION['user_type']!='Admin'){
+  header("location: ../../index.php");
+}
 ?>
 
 <?php
@@ -76,6 +78,7 @@ include_once '../../include/auth.php';
       <span>Hi, <strong><?php echo $row1['fullname'] ?></strong></span><br>
       
       <a href="../profile.php" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="../settings.php" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
       <a href="../../logout.php" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
     </div>
   </div>
@@ -110,13 +113,14 @@ include_once '../../include/auth.php';
           </div>
         </div>
         <div class="w3-dropdown-hover">
-          <button class="w3-button"><i class="fa fa-bars fa-fw"></i> Notice <i class="fa fa-caret-down"></i></button>
+          <button class="w3-button"><i class="fa fa-bell fa-fw"></i> Notice <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
-            <a href="../notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw"></i> Add Notice</a>
+            <a href="../notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Add Notice</a>
             <a href="../notice/view_notice.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> View Notice</a>
           </div>
         </div>
-    <a href="../profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Profile</a>
+        <a href="../add_admin.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-universal-access"></i> Add Admin</a>
+    <a href="../profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i> Profile</a>
       <a href="../settings.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Settings</a>
 	<a href="../../logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
   </div>

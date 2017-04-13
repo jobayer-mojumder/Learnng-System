@@ -2,7 +2,9 @@
 
 include_once '../include/config.php';
 include_once '../include/auth.php';
-
+if($_SESSION['user_type']!='Trainer'){
+  header("location:../index.php");
+}
 ?>
 
 <?php

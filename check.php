@@ -42,6 +42,7 @@
 			session_regenerate_id();
 			$member = mysql_fetch_assoc($result);
 			$_SESSION['SESS_MEMBER_ID'] = $member['id'];
+			$_SESSION['user_type'] = $member['type'];
 			$id = $_SESSION['SESS_MEMBER_ID'];
 			$qry1="SELECT * FROM user WHERE id='$id'";
 			$result1=mysql_query($qry1);

@@ -19,14 +19,14 @@ include_once '../../include/auth.php';
  $id6=$row6['id'];
  
 
- $query_upload="INSERT into batch "."(batch_id1, subject_name, venue_name, district, company_name, start, end, user_id)"." VALUES"." ('$batchid', '$subject', '$venue', '$district', '$company', '$start', '$end', '$id6')";
+ $query_upload="INSERT into batch "."(batch_id1, subject_name, venue_name, district, company_name, start, end, user_id, batch_status)"." VALUES"." ('$batchid', '$subject', '$venue', '$district', '$company', '$start', '$end', '$id6', 'Offline')";
 
  mysql_query($query_upload) or die("error in $query_upload == ----> ".mysql_error()); 
 
 }
  ?>
  <script>
- window.location.href='index.php';
+ window.location.href='view_batch.php';
  </script>
  
  

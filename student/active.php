@@ -1,5 +1,7 @@
 ﻿<?php 
-
+if($_SESSION['user_type']!='Student'){
+  header("location:../index.php");
+}
 error_reporting(E_ERROR | E_PARSE);
 include_once '../include/config.php';
 include_once '../include/auth.php';

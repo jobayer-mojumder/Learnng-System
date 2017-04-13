@@ -2,7 +2,9 @@
 
 include_once '../include/auth.php';
 include_once '../include/config.php';
-
+if($_SESSION['user_type']!='Trainer'){
+  header("location:../index.php");
+}
 ?>
 
 <?php
@@ -63,6 +65,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> Overview</a>
+
+    <div class="w3-dropdown-hover">
+          <button class="w3-button "><i class="fa fa-globe fa-fw"></i> Gallery <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="upload_image.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i> Upload Image</a>
+            <a href="show_gallery.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> Show Gallery</a>
+          </div>
+        </div>
 	<a href="notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notice</a>
     <a href="profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i> Profile</a>
 	<a href="../logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i> Logout</a><br><br>

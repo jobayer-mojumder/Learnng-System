@@ -2,7 +2,9 @@
 
 include_once '../../include/config.php';
 include_once '../../include/auth.php';
-
+if($_SESSION['user_type']!='Admin'){
+  header("location: ../../index.php");
+}
 ?>
 
 <?php
@@ -62,11 +64,40 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="../index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> Overview</a>
 	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Settings</a>
-	<a href="../student/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-circle fa-fw"></i> Student</a>
-	<a href="../trainer/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-globe fa-fw"></i> Trainer</a>
-	<a href="index.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bars fa-fw"></i> Batch</a>
-	<a href="../notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notice</a>
+	<div class="w3-dropdown-hover">
+          <button class="w3-button"><i class="fa fa-user-circle fa-fw"></i> Student <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="../student/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw"></i> Add Student</a>
+            <a href="../student/view_student.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> View Student</a>
+          </div>
+        </div>
+
+        <div class="w3-dropdown-hover">
+          <button class="w3-button"><i class="fa fa-globe fa-fw"></i> Trainer <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="../trainer/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i> Add Trainer</a>
+            <a href="../trainer/view_trainer.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> View Trainer</a>
+          </div>
+        </div>
+
+
+        <div class="w3-dropdown-hover">
+          <button class="w3-button"><i class="fa fa-bars fa-fw"></i> Batch <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw"></i> Add Batch</a>
+            <a href="view_batch.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> View Batch</a>
+          </div>
+        </div>
+      <div class="w3-dropdown-hover">
+          <button class="w3-button"><i class="fa fa-bell fa-fw"></i> Notice <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="../notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Add Notice</a>
+            <a href="../notice/view_notice.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> View Notice</a>
+          </div>
+        </div>
+        <a href="../add_admin.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-universal-access"></i> Add Admin</a>
     <a href="../profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Profile</a>
+    <a href="../settings.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Settings</a>
 	<a href="../../logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
   </div>
 </nav>
@@ -83,7 +114,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </header>
 
 <div class="w3-container w3-blue-grey w3-padding w3-padding-left"><p style="font-size: 20px; font-family: Sanchez"><i class="w3-xlarge fa-fw fa fa-info-circle"></i> Batch Details</p></div>
-<div class="w3-container w3-card-4"><a class="w3-btn w3-white w3-border w3-right" style="margin-right: -17px;" href="index.php"><i class="fa fa-eye"></i> View All</a></div>
+<div class="w3-container w3-card-4"><a class="w3-btn w3-white w3-border w3-right" style="margin-right: -17px;" href="view_batch.php"><i class="fa fa-eye"></i> View All</a></div>
 
 <form action="" class="w3-card-4 w3-light-grey w3-text-blue w3-padding" method="post">
 <?php

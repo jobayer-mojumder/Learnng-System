@@ -1,7 +1,7 @@
-﻿<?php
+<?php
 
-include_once '../include/config.php';
 include_once '../include/auth.php';
+include_once '../include/config.php';
 if($_SESSION['user_type']!='Trainer'){
   header("location:../index.php");
 }
@@ -11,12 +11,12 @@ if($_SESSION['user_type']!='Trainer'){
  mysql_query ("set character_set_results='utf8'");
  $sql="SELECT * FROM settings WHERE id=1";
  $result=mysql_query($sql);
- $row=mysql_fetch_array($result)
+ $row=mysql_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
 <html>
-<title>My Details | <?php echo $row['stitle'] ?></title>
+<title>Trainer Dashboard | <?php echo $row['stitle'] ?></title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../assets/img/fav.png" rel="shortcut icon">
@@ -30,6 +30,14 @@ if($_SESSION['user_type']!='Trainer'){
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 
+<?php
+ $id = $_SESSION['SESS_MEMBER_ID'];
+ $sql1="SELECT * FROM user WHERE id='$id'";
+ $result1=mysql_query($sql1);
+ $row1=mysql_fetch_array($result1);
+ ?>
+
+
 <body class="w3-light-grey">
 
 <!-- Top container -->
@@ -39,13 +47,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </div>
 
 <!-- Sidebar -->
-<?php
- $id = $_SESSION['SESS_MEMBER_ID'];
- $sql1="SELECT * FROM user WHERE id='$id'";
- $result1=mysql_query($sql1);
- $row1=mysql_fetch_array($result1);
-?>
-
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
@@ -53,7 +54,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Hi, <strong><?php echo $row1['fullname'] ?></strong></span><br>
-	  
       <a href="profile.php" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
       <a href="../logout.php" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i></a>
     </div>
@@ -65,9 +65,17 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> Overview</a>
-	<a href="notice/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notice</a>
-    <a href="profile.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-user fa-fw"></i> Profile</a>
-	<a href="../logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+    <div class="w3-dropdown-hover">
+          <button class="w3-button "><i class="fa fa-globe fa-fw"></i> Gallery <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block" style="padding-left: 15px;">
+            <a href="upload_image.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-user-plus fa-fw"></i> Upload Image</a>
+            <a href="show_gallery.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa fa-eye fa-fw"></i> Show Gallery</a>
+          </div>
+        </div>
+	<a href="notice/index.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notice</a>
+    <a href="profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i> Profile</a>
+	<a href="../logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i> Logout</a><br><br>
   </div>
 </nav>
 
@@ -81,36 +89,34 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Header -->
 <header class="w3-container" style="padding-top:22px">
 </header>
-<div class="w3-container w3-blue-grey w3-padding w3-padding-left"><p style="font-size: 20px; font-family: Sanchez"><i class="w3-xlarge fa-fw fa fa-info-circle"></i> My Details</p></div>
-<form action="" class="w3-card-2 w3-light-grey w3-text-blue w3-padding" method="post">
+<!-- active center -->
+<div class="w3-container w3-blue-grey w3-padding-left w3-margin-left"><p style="font-size: 20px; font-family: Adamina"><i class="w3-xlarge fa-fw fa fa-eye"></i> Upload Image</p></div>
+<form action="upload.php" class="w3-card-2 w3-light-grey w3-text-blue w3-padding w3-padding-left w3-margin-left" method="post" enctype="multipart/form-data">
+<div class="w3-row w3-section">
+<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-check"></i></div>
+<div class="w3-rest">
 <?php
-$id = $_SESSION['SESS_MEMBER_ID'];
-$result4 = mysql_query("SELECT * FROM user WHERE type='Trainer' AND id='$id'")
-or die(mysql_error());
-$row4 = mysql_fetch_array($result4);
-$fullname = $row4['fullname'];
-$email = $row4['email'];
-$phone = $row4['phone'];
-$skype = $row4['skype'];
-$img = $row4['img'];
-$result5 = mysql_query("SELECT * FROM student WHERE phone='$phone' ORDER BY student_id DESC LIMIT 1 OFFSET 0")
-or die(mysql_error());
-$row5 = mysql_fetch_array($result5);
-$earning5=$row5['latest_earning'];	
+$sql2 = "SELECT batch_id1 FROM batch WHERE user_id='$id' ORDER BY batch_id1 DESC";
+$result2 = mysql_query($sql2);
 ?>
-<div class="w3-row">
-<div class="w3-col m4 l4" style="padding-top: 20px; padding-bottom: 20px;"><img class="preview" id="i1" src="../assets/img/<?php echo $img; ?>" style="width:100%;"></div>
-<div class="w3-col m8 l8 w3-light-grey" style="margin-top: 8px; padding-left: 30px;">
-<h5><i class="w3-large fa fa-user"></i> &nbsp; Full Name: <?php echo $fullname; ?></h5>
-<h5><i class="w3-large fa fa-envelope-o"></i> &nbsp; Email Address: <?php echo $email; ?></h5>
-<h5><i class="w3-large fa fa-phone"></i> &nbsp; Phone No: <?php echo $phone; ?></h5>
-<h5><i class="w3-large fa fa-skype"></i> &nbsp; Skype ID: <?php echo $skype; ?></h5>
+<select class="w3-select" name="batch" onchange="fetch_select(this.value);" required>
+<option value="" disabled selected>Choose Batch</option>
+<?php
+while ($row2 = mysql_fetch_array($result2)) {
+echo "<option value='" . $row2['batch_id1'] ."'>" . $row2['batch_id1'] ."</option>";
+}
+?>
+</select>
+</div>
+<div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-image"></i></div>
+<div class="w3-rest">
+  <input type="file" class="w3-select" name="files[]" multiple required>
 </div>
 </div>
-</form>	
-</div>
-</div>
-<br><br><br><br><br>
+<button type="submit" name="submit" class="w3-btn-block w3-section w3-blue w3-ripple w3-padding">Upload Image</button>
+</form>
+
+<br><br>
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");

@@ -61,7 +61,7 @@ if(move_uploaded_file($temp_name, $target_path)) {
  
  ?>
  <script>
- window.location.href='index.php';
+ window.location.href='view_student.php';
  </script>
  
  

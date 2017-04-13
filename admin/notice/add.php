@@ -28,7 +28,7 @@ include_once '../../include/auth.php';
 }
 ?>
 <script>
-window.location.href='index.php';
+window.location.href='view_notice.php';
 </script>
  
  

@@ -1,7 +1,9 @@
 ﻿<?php  
 include_once '../../include/config.php';
 include_once '../../include/auth.php';
- 
+if($_SESSION['user_type']!='Trainer'){
+  header("location:../../index.php");
+}
  $id = $_SESSION['SESS_MEMBER_ID'];
  
  if(isset($_POST['submit']))

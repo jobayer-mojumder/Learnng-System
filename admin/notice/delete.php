@@ -25,7 +25,7 @@ or die(mysql_error());
 
 // redirect back to the view page
 
-header("Location: index.php");
+header("Location: view_notice.php");
 
 }
 
@@ -33,7 +33,7 @@ else
 
 {
 
-header("Location: index.php");
+header("Location: view_notice.php");
 
 }
 
